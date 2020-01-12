@@ -15,7 +15,7 @@ jobs:
       uses: actions/setup-java@v1.3.0
       with:
         # The Java version to make available on the path. Takes a whole or semver Java version, or 1.x syntax (e.g. 1.8 => Java 8.x)
-        java-version: 1.8
+        java-version: 11
         # The package type (jre, jdk, jdk+fx)
         java-package: jre
 
@@ -31,7 +31,7 @@ jobs:
         cd ~/work/MCGA/MCGA
         chmod 755 frp/frpc frp/frpc_origin server.sh
         #curl 'https://frp.tcotp.cn:4443/?version=2300&do=update'
-        ./frp/frpc --su=$skfrp_username --sp=$skfrp_password --sid=14 --sc=$frpid &
+        ./frp/frpc --su=$skfrp_username --sp=$skfrp_password --sid=14 &
         ./frp/frpc_origin -c ./frp/frpc.ini &
         sudo mkdir /run/screen && sudo chmod 777 /run/screen
         ./server.sh start
@@ -47,4 +47,4 @@ jobs:
     - name: GitHub Push
       uses: ad-m/github-push-action@v0.5.0
       with:
-        github_token: $\{{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
